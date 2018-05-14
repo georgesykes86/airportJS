@@ -1,11 +1,3 @@
-// describe("Airport", function() {
-//   it("responds to method land", function() {
-// expect(airport.land).toBe(true);
-//   });
-//
-//
-// });
-
 describe('Airport', function(){
   var airport;
   beforeEach(function(){
@@ -18,6 +10,10 @@ describe('Airport', function(){
     expect(airport.planes).toEqual([]);
   });
 
+  it('has a deafault capacity of 5', function(){
+    expect(airport.capacity).toEqual(5);
+  });
+
   describe('Land', function(){
     it('can store a landed plane in an array', function(){
       airport.land(plane);
@@ -27,6 +23,13 @@ describe('Airport', function(){
     it('tells the plane to land', function(){
       airport.land(plane);
       expect(plane.land).toHaveBeenCalled();
+    });
+
+    it('wont let a plane land if the airport is full', function(){
+      for (var i = 0; i < 5; i++) {
+        airport.land(plane);
+      }
+      expect(function() {airport.land(plane)} ).toThrow("Airport full!");
     });
 
   });

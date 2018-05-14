@@ -1,12 +1,18 @@
 function Airport(){
+  const DEFAULT_CAPACITY = 5;
   this.planes = [];
-  this.land = function(plane){
-    plane.land();
-    return this.planes.push(plane);
-   };
-  this.release = function(plane){
-    plane.takeOff();
-    return this.planes.pop();
-  };
-
+  this.capacity = DEFAULT_CAPACITY;
 }
+
+Airport.prototype.land = function(plane){
+  if (this.planes.length >= this.capacity) {
+    throw "Airport full!";
+  }
+  plane.land();
+  return this.planes.push(plane);
+ };
+
+Airport.prototype.release = function(plane){
+  plane.takeOff();
+  return this.planes.pop();
+};
