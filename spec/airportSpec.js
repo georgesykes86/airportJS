@@ -2,6 +2,7 @@ describe('Airport', function(){
   var airport;
   beforeEach(function(){
     airport = new Airport();
+    airport2 = new Airport(10);
     plane = jasmine.createSpyObj('plane', ['land', 'takeOff']);
     plane2 = jasmine.createSpyObj('plane', ['land', 'takeOff']);
   });
@@ -13,6 +14,10 @@ describe('Airport', function(){
 
   it('has a deafault capacity of 5', function(){
     expect(airport.capacity).toEqual(5);
+  });
+
+  it('has a deafault capacity of 10 when setting the capacity', function(){
+    expect(airport2.capacity).toEqual(10);
   });
 
   describe('Land', function(){

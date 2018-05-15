@@ -1,7 +1,6 @@
-function Airport(){
-  const DEFAULT_CAPACITY = 5;
+function Airport(capacity = 5){
   this.planes = [];
-  this.capacity = DEFAULT_CAPACITY;
+  this.capacity = capacity;
 }
 
 Airport.prototype.land = function(plane){
