@@ -56,7 +56,11 @@ describe('Airport', function(){
 
     });
 
+    it('cannot take off from wrong airport', function(){
+      airport.land(plane);
+      expect(function() { airport2.release(plane) }).toThrow('Plane not in airport');
 
+    });
 
  });
 
