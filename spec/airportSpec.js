@@ -1,10 +1,12 @@
-describe('Airport', function(){
+xdescribe('Airport', function(){
   var airport;
   beforeEach(function(){
-    airport = new Airport();
-    airport2 = new Airport(10);
     plane = jasmine.createSpyObj('plane', ['land', 'takeOff']);
     plane2 = jasmine.createSpyObj('plane', ['land', 'takeOff']);
+    var weather = new Weather();
+    weatherman = spyOn(weather, 'beStormy').and.returnValue(false);
+    airport = new Airport(weatherman);
+    airport2 = new Airport(weatherman, 10);
   });
 
 
@@ -38,6 +40,12 @@ describe('Airport', function(){
       expect(function() {airport.land(plane)} ).toThrow("Airport full!");
     });
 
+    it('won\'t land when weather is bad', function(){
+      weatherman = jasmine.spyOn(weather, 'beStormy').andReturn(true);
+      airport = new Airport(weatherman);
+      expect(function() {airport.land(plane)} ).toThrow("Weather is bad");
+    });
+
   });
 
   describe('Release', function(){
@@ -62,6 +70,14 @@ describe('Airport', function(){
 
     });
 
+    // it('cannot take off when weather is bad', function() {
+    //   airport.land(plane);
+    //
+    //   expect()
+    // });
+
  });
+
+
 
 });

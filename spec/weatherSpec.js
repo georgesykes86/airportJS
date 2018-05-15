@@ -5,12 +5,12 @@ describe('Weather', function(){
   });
 
   it('isnt stormy', function(){
-    var othernumber = { x: 4}
+    var othernumber = { randomiser: function() { return 4; }}
     expect(weather.beStormy.call(othernumber)).toBe(false);
   });
 
   it('isnt stormy', function(){
-    var othernumber = { x: 2}
+    var othernumber = { randomiser: function() { return 2; } }
     expect(weather.beStormy.call(othernumber)).toBe(true);
   });
 

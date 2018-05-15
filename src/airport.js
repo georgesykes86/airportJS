@@ -1,12 +1,12 @@
-function Airport(capacity = 5){
+function Airport(weatherman, capacity = 5){
   this.planes = [];
   this.capacity = capacity;
+  this.weatherman = weatherman;
 }
 
 Airport.prototype.land = function(plane){
-  if (this.planes.length >= this.capacity) {
-    throw "Airport full!";
-  }
+  if (this.weatherman.beStormy()) {throw "Weather is bad" };
+  if (this.planes.length >= this.capacity) {throw "Airport full!" };
   plane.land();
   return this.planes.push(plane);
  };
