@@ -1,4 +1,5 @@
 function Weather() {
+  this.weather =
 }
 
 Weather.prototype.beStormy = function() {

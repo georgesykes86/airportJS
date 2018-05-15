@@ -1,12 +1,12 @@
-xdescribe('Airport', function(){
+describe('Airport', function(){
   var airport;
   beforeEach(function(){
     plane = jasmine.createSpyObj('plane', ['land', 'takeOff']);
     plane2 = jasmine.createSpyObj('plane', ['land', 'takeOff']);
     var weather = new Weather();
-    weatherman = spyOn(weather, 'beStormy').and.returnValue(false);
-    airport = new Airport(weatherman);
-    airport2 = new Airport(weatherman, 10);
+    spyOn(weather, 'beStormy').and.returnValue(false);
+    airport = new Airport(weather);
+    airport2 = new Airport(weather, 10);
   });
 
 
@@ -39,13 +39,6 @@ xdescribe('Airport', function(){
       }
       expect(function() {airport.land(plane)} ).toThrow("Airport full!");
     });
-
-    it('won\'t land when weather is bad', function(){
-      weatherman = jasmine.spyOn(weather, 'beStormy').andReturn(true);
-      airport = new Airport(weatherman);
-      expect(function() {airport.land(plane)} ).toThrow("Weather is bad");
-    });
-
   });
 
   describe('Release', function(){
@@ -70,11 +63,29 @@ xdescribe('Airport', function(){
 
     });
 
-    // it('cannot take off when weather is bad', function() {
-    //   airport.land(plane);
-    //
-    //   expect()
-    // });
+    describe('Stormy Weather', function(){
+
+      it('won\'t land when weather is bad', function(){
+        var weather2 = new Weather();
+        spyOn(weather2, 'beStormy').and.returnValue(true);
+        airport3 = new Airport(weather2);
+        expect(function() {airport3.land(plane)} ).toThrow("Weather is bad");
+      });
+
+      it('cannot take off when weather is bad', function() {
+        var weather3 = new Weather();
+        spyOn(weather3, "beStormy").and.returnValues(false, true);
+        airport4 = new Airport(weather3);
+        airport4.land(plane);
+        expect(function() { airport4.release(plane)} ).toThrow("Weather is bad");
+      });
+
+
+    });
+
+
+
+
 
  });
 
