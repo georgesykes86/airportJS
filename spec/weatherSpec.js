@@ -4,8 +4,14 @@ describe('Weather', function(){
     weather = new Weather();
   });
 
-  it('Does nothing', function(){
-    expect(weather.beStormy()).toBe(false);
+  it('isnt stormy', function(){
+    var othernumber = { x: 4}
+    expect(weather.beStormy.call(othernumber)).toBe(false);
+  });
+
+  it('isnt stormy', function(){
+    var othernumber = { x: 2}
+    expect(weather.beStormy.call(othernumber)).toBe(true);
   });
 
 
