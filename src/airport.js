@@ -14,5 +14,6 @@ Airport.prototype.land = function(plane){
 
 Airport.prototype.release = function(plane){
   plane.takeOff();
-  return this.planes.pop();
+  var index = this.planes.indexOf(plane);
+  return this.planes.splice(index,1);
 };

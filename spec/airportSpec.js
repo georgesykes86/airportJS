@@ -3,6 +3,7 @@ describe('Airport', function(){
   beforeEach(function(){
     airport = new Airport();
     plane = jasmine.createSpyObj('plane', ['land', 'takeOff']);
+    plane2 = jasmine.createSpyObj('plane', ['land', 'takeOff']);
   });
 
 
@@ -37,8 +38,9 @@ describe('Airport', function(){
   describe('Release', function(){
     it('can release a plane from the array', function(){
       airport.land(plane);
+      airport.land(plane2);
       airport.release(plane);
-      expect(airport.planes).toEqual([]);
+      expect(airport.planes).not.toContain(plane);
 
     });
 
