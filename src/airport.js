@@ -12,9 +12,8 @@ Airport.prototype.land = function(plane){
  };
 
 Airport.prototype.release = function(plane){
-   if (!this.planes.includes(plane)){
-    throw "Plane not in airport";
-  }
+  if (this.weatherman.beStormy()) {throw "Weather is bad" };
+  if (!this.planes.includes(plane)){throw "Plane not in airport";}
   plane.takeOff();
   var index = this.planes.indexOf(plane);
   return this.planes.splice(index,1);
